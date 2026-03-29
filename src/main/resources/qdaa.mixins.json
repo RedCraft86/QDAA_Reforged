@@ -4,6 +4,11 @@
   "package": "com.redcraft86.qdaa.mixin",
   "refmap": "qdaa.refmap.json",
   "client": [
+    "AccessNativeImage",
+    "AccessWindow",
+    "MixinRenderTarget",
+    "MixinScreenshot",
+    "MixinWindow"
   ],
   "minVersion": "0.8"
 }
