@@ -1,0 +1,11 @@
+package com.redcraft86.qdaa;
+
+import net.minecraftforge.common.ForgeConfigSpec;
+
+public class ClientCfg {
+    private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
+
+    public static final ForgeConfigSpec SPEC = BUILDER.build();
+
+    public static boolean isLoaded() { return SPEC.isLoaded(); }
+}
