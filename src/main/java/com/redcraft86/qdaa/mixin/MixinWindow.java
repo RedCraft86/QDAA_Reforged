@@ -29,6 +29,7 @@ public class MixinWindow {
             ), remap = false
     )
     private void qdaa_modifyInitialSize(long window, int[] w, int[] h) {
+        // Credit: exaptations for the original implementation
         GLFW.glfwGetFramebufferSize(window, w, h);
         w[0] = QDAA.upscale(w[0]);
         h[0] = QDAA.upscale(h[0]);

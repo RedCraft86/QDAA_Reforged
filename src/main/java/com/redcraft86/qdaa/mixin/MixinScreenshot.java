@@ -19,6 +19,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class MixinScreenshot {
     @Inject(method = "takeScreenshot", at = @At("HEAD"), cancellable = true)
     private static void qdaa_takeScreenshot(RenderTarget frameBuffer, CallbackInfoReturnable<NativeImage> cir) {
+
+        // Credit: exaptations for the original implementation
         if (frameBuffer == Minecraft.getInstance().getMainRenderTarget()) {
             int fWidth = frameBuffer.width;
             int fHeight = frameBuffer.height;

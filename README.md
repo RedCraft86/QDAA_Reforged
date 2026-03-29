@@ -1,4 +1,6 @@
-This is a sample library mod
+Forge port of Quick & Dirty Anti-Aliasing (QDAA) which uses super-sampling to get rid of jagged edges in distant blocks.
+
+**LICENSE CHANGES**: Original mod by exaptations which is licensed under CC0-1.0. This port relicenses it to MIT as it is more suitable for code while providing a similar level of freedom.
 
 ### **Modpack Usage**
 You may include this mod into your own modpacks as long as it is distributed through CurseForge, Modrinth, or any other recognized mainstream modding platforms that may exist in the future.

@@ -29,6 +29,7 @@ public class MixinRenderTarget {
     @Inject(method = "blitToScreen(II)V", at = @At("HEAD"), remap = false, cancellable = true)
     private void qdaa_sssaDraw(int width, int height, CallbackInfo ci) {
         if (qdaa_isValid()) {
+            // Credit: exaptations for the original implementation
             MainTarget self = (MainTarget)(Object)this;
             glBindFramebuffer(GL_READ_FRAMEBUFFER, self.frameBufferId);
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
