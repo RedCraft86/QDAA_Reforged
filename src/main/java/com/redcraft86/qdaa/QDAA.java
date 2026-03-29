@@ -32,7 +32,7 @@ public class QDAA {
             Minecraft mc = Minecraft.getInstance();
             Window window = mc.getWindow();
 
-            // Mimic a window resize when changing scale factor to properly update render target
+            // Mimic a window resize when changing scale factor to properly update the render target
             ((AccessWindow)(Object)window).qdaa_onFramebufferResize(
                 window.getWindow(), window.getScreenWidth(), window.getScreenHeight()
             );

@@ -12,7 +12,7 @@ public class ClientCfg {
             .comment("MEDIUM: 1.5x")
             .comment("HIGH:   1.75x")
             .comment("ULTRA:  2.0x")
-            .defineEnum("scaleFactor", ScaleFactor.LOW);
+            .defineEnum("scaleFactor", ScaleFactor.MEDIUM);
 
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 
