@@ -5,6 +5,7 @@ import com.mojang.logging.LogUtils;
 
 import net.minecraft.client.Minecraft;
 import com.mojang.blaze3d.platform.Window;
+import com.mojang.blaze3d.systems.RenderSystem;
 
 import com.redcraft86.qdaa.mixin.AccessWindow;
 
@@ -28,14 +29,15 @@ public class QDAA {
     }
 
     public void configReload(ModConfigEvent event) {
-        if (event.getConfig().getSpec() == ClientCfg.SPEC && ClientCfg.isLoaded()) {
+        if (event.getConfig().getSpec() == ClientCfg.SPEC && ClientCfg.isLoaded() && ClientCfg.HOT_RELOADING.get()) {
             Minecraft mc = Minecraft.getInstance();
             Window window = mc.getWindow();
-
-            // Mimic a window resize when changing scale factor to properly update the render target
-            ((AccessWindow)(Object)window).qdaa_onFramebufferResize(
-                window.getWindow(), window.getScreenWidth(), window.getScreenHeight()
-            );
+            RenderSystem.recordRenderCall(() -> {
+                // Mimic a window resize when changing scale factor to properly update the render target
+                ((AccessWindow)(Object)window).qdaa_onFramebufferResize(
+                        window.getWindow(), window.getScreenWidth(), window.getScreenHeight()
+                );
+            });
         }
     }
 
