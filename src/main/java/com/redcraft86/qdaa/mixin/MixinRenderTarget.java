@@ -1,6 +1,6 @@
 package com.redcraft86.qdaa.mixin;
 
-import com.redcraft86.qdaa.QDAA;
+import com.redcraft86.qdaa.WindowSize;
 import net.minecraft.client.Minecraft;
 import com.mojang.blaze3d.pipeline.MainTarget;
 import com.mojang.blaze3d.pipeline.RenderTarget;
@@ -29,13 +29,12 @@ public class MixinRenderTarget {
     @Inject(method = "blitToScreen(II)V", at = @At("HEAD"), remap = false, cancellable = true)
     private void qdaa_sssaDraw(int width, int height, CallbackInfo ci) {
         if (qdaa_isValid()) {
-            // Credit: exaptations for the original implementation
             MainTarget self = (MainTarget)(Object)this;
             glBindFramebuffer(GL_READ_FRAMEBUFFER, self.frameBufferId);
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
             glBlitFramebuffer(
                     0, 0, width, height,
-                    0, 0, QDAA.unscale(width), QDAA.unscale(height),
+                    0, 0, WindowSize.oWidth(), WindowSize.oHeight(),
                     GL_COLOR_BUFFER_BIT, GL_LINEAR
             );
 

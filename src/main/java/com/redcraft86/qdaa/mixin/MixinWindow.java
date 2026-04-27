@@ -1,8 +1,6 @@
 package com.redcraft86.qdaa.mixin;
 
-import com.redcraft86.qdaa.QDAA;
-
-import org.lwjgl.glfw.GLFW;
+import com.redcraft86.qdaa.WindowSize;
 import com.mojang.blaze3d.platform.Window;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,12 +12,14 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class MixinWindow {
     @ModifyVariable(method = "onFramebufferResize", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     private int qdaa_modifyWidth(int width) {
-        return QDAA.upscale(width);
+        WindowSize.setWidth(width);
+        return WindowSize.uWidth();
     }
 
     @ModifyVariable(method = "onFramebufferResize", at = @At("HEAD"), ordinal = 1, argsOnly = true)
     private int qdaa_modifyHeight(int height) {
-        return QDAA.upscale(height);
+        WindowSize.setHeight(height);
+        return WindowSize.uHeight();
     }
 
     @Redirect(method = "refreshFramebufferSize",
@@ -29,9 +29,8 @@ public class MixinWindow {
             ), remap = false
     )
     private void qdaa_modifyInitialSize(long window, int[] w, int[] h) {
-        // Credit: exaptations for the original implementation
-        GLFW.glfwGetFramebufferSize(window, w, h);
-        w[0] = QDAA.upscale(w[0]);
-        h[0] = QDAA.upscale(h[0]);
+        WindowSize.updateWindow(window);
+        w[0] = WindowSize.uWidth();
+        h[0] = WindowSize.uHeight();
     }
 }

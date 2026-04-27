@@ -1,8 +1,5 @@
 package com.redcraft86.qdaa;
 
-import org.slf4j.Logger;
-import com.mojang.logging.LogUtils;
-
 import net.minecraft.client.Minecraft;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -18,7 +15,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(QDAA.MOD_ID)
 public class QDAA {
     public static final String MOD_ID = "qdaa";
-    private static final Logger LOGGER = LogUtils.getLogger();
 
     public QDAA(FMLJavaModLoadingContext context)
     {
@@ -29,23 +25,18 @@ public class QDAA {
     }
 
     public void configReload(ModConfigEvent event) {
-        if (event.getConfig().getSpec() == ClientCfg.SPEC && ClientCfg.isLoaded() && ClientCfg.HOT_RELOADING.get()) {
-            Minecraft mc = Minecraft.getInstance();
-            Window window = mc.getWindow();
+        if (event.getConfig().getSpec() == ClientCfg.SPEC
+            && ClientCfg.isLoaded() && ClientCfg.HOT_RELOADING.get()) {
+
+            // Mimic a window resize when changing scale factor to properly update the render target
             RenderSystem.recordRenderCall(() -> {
-                // Mimic a window resize when changing scale factor to properly update the render target
+                Minecraft mc = Minecraft.getInstance();
+                Window window = mc.getWindow();
+
                 ((AccessWindow)(Object)window).qdaa_onFramebufferResize(
-                        window.getWindow(), window.getScreenWidth(), window.getScreenHeight()
+                    window.getWindow(), window.getScreenWidth(), window.getScreenHeight()
                 );
             });
         }
-    }
-
-    public static int upscale(int Value) {
-        return ClientCfg.isLoaded() ? (int)(Value * ClientCfg.SCALE_FACTOR.get().Scale) : Value;
-    }
-
-    public static int unscale(int Value) {
-        return ClientCfg.isLoaded() ? (int)(Value / ClientCfg.SCALE_FACTOR.get().Scale) : Value;
     }
 }
