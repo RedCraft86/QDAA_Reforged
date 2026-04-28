@@ -1,6 +1,5 @@
 package com.redcraft86.qdaa.mixin;
 
-import com.redcraft86.qdaa.QDAA;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
 import com.mojang.blaze3d.platform.NativeImage;
@@ -32,8 +31,8 @@ public class MixinScreenshot {
                     sData.put(i + 3, (byte)0xFF);
                 }
 
-                int sWidth = QDAA.unscale(fWidth);
-                int sHeight = QDAA.unscale(fHeight);
+                int sWidth = fWidth / 2;
+                int sHeight = fHeight / 2;
 
                 var img = new NativeImage(sWidth, sHeight, false);
                 var dData = MemoryUtil.memByteBuffer(

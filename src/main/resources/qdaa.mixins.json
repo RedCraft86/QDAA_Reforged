@@ -5,7 +5,6 @@
   "refmap": "qdaa.refmap.json",
   "client": [
     "AccessNativeImage",
-    "AccessWindow",
     "MixinRenderTarget",
     "MixinScreenshot",
     "MixinWindow"

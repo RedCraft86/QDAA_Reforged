@@ -1,6 +1,5 @@
 package com.redcraft86.qdaa.mixin;
 
-import com.redcraft86.qdaa.QDAA;
 import net.minecraft.client.Minecraft;
 import com.mojang.blaze3d.pipeline.MainTarget;
 import com.mojang.blaze3d.pipeline.RenderTarget;
@@ -35,7 +34,7 @@ public class MixinRenderTarget {
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
             glBlitFramebuffer(
                     0, 0, width, height,
-                    0, 0, QDAA.unscale(width), QDAA.unscale(height),
+                    0, 0, width / 2, height / 2,
                     GL_COLOR_BUFFER_BIT, GL_LINEAR
             );
 
