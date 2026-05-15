@@ -42,4 +42,20 @@ public class MixinRenderTarget {
             ci.cancel();
         }
     }
+
+//    @Inject(method = "_resize", at = @At("HEAD"), remap = false, cancellable = true)
+//    private void qdaa_resize(int width, int height, boolean clearError, CallbackInfo ci) {
+//        if (qdaa_isValid()) {
+//            MainTarget self = (MainTarget)(Object)this;
+//            glBindFramebuffer(GL_READ_FRAMEBUFFER, self.frameBufferId);
+//            glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+//            glBlitFramebuffer(
+//                    0, 0, width, height,
+//                    0, 0, QDAA.unscale(width), QDAA.unscale(height),
+//                    GL_COLOR_BUFFER_BIT, GL_LINEAR
+//            );
+//
+//            ci.cancel();
+//        }
+//    }
 }
